@@ -1,0 +1,72 @@
+<template>
+    <main>
+        <div style="text-align:center">
+            <svg width="221" height="357" viewBox="0 0 221 357" fill="none" stroke="#16325c" stroke-linejoin="round" stroke-width="8"><path fill="#e4f2f8" d="M51 4L4 177h68L30 353l187-228h-73L198 4z"></path><path d="M75 43l-24 90 24-90z"></path></svg>
+            
+            <h1>Fun Game Built with LWC within LWR </h1>
+        </div>
+       
+        
+
+        
+        <section class="row" lwc:if={pns}>
+            <div class="small-6 columns">
+                <h1 class="text-center">{Player1Name}(You) - {myWidth}</h1>
+                <div class="healthbar">
+                    <div class="healthbar text-center" style={myStyle}>
+    
+                    </div>
+                </div>
+            </div>
+            <div class="small-6 columns">
+                <h1 class="text-center">{Player2Name}(PC) - { monsterWidth}</h1>
+                <div class="healthbar">
+                    <div class="healthbar text-center" style={monsterStyle}>
+    
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="row" style="margin-top:30px;text-align:center" lwc:else>
+            <div class="" style="width:100%">
+                <input type="text" onchange={handleChange} name="Player1Name" placeholder="Player 1 Name">
+                <input type="text" onchange={handleChange} name="Player2Name" placeholder="Player 2 Name">
+                <button class="start-game" onclick={setName}>NEXT</button>
+            </div>
+        </section>
+        <template lwc:if={showAndPns}>
+            <section class="row controls" >
+                <div class="small-12 columns">
+                    <button class="attack" onclick={attack}>ATTACK</button>
+                    <button class="special-attack" onclick={spcAttack}>SPECIAL ATTACK</button>
+                    <button class="heal" onclick={heal}>HEAL</button>
+                    <button class="give-up" onclick={giveUp}>GIVE UP</button>
+                </div>
+            </section>
+        </template>
+        <template lwc:if={nShowAndPns}>
+            <section class="row controls" >
+                <div class="small-12 columns">
+                    <button class="start-game" onclick={start}>START NEW GAME</button>
+                </div>
+            </section>
+
+        </template>
+        
+        <section class="row log" lwc:if={pns}>
+            <div class="small-12 columns">
+                <ul>
+                    <template if:true={attackLogs}>
+                        <template  key={makeid}  for:each={attackLogs} for:item="log">
+                            <li key={makeid} style="background:#f7a444">
+                                { log }
+                            </li>
+                            
+                        </template>
+                    </template>
+                </ul>
+            </div>
+        </section>
+        
+    </main>
+</template>
